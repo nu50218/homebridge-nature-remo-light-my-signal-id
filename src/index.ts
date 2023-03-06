@@ -93,8 +93,7 @@ class Accessory implements AccessoryPlugin {
 
   async setOnHandler(
     value: CharacteristicValue,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _: CharacteristicSetCallback,
+    callback: CharacteristicSetCallback,
   ) {
     this.log.info('Setting lightbulb state to', value);
     const signal_id = (value ? this.signal_id_on : this.signal_id_off);
@@ -108,9 +107,11 @@ class Accessory implements AccessoryPlugin {
       () => {
         this.state = value;
         this.log.info('Completed Setting lightbulb state to', value);
+        callback();
       },
       (err) => {
         this.log('error:', err);
+        callback(err);
       },
     );
   }
