@@ -104,7 +104,11 @@ class Accessory implements AccessoryPlugin {
       headers: {
         Authorization: `Bearer ${this.access_token}`,
       },
-    }).catch(
+    }).then(
+      () => {
+        this.state = value;
+        this.log.info('Completed Setting lightbulb state to', value);
+      },
       (err) => {
         this.log('error:', err);
       },

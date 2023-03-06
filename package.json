@@ -2,7 +2,7 @@
   "private": false,
   "displayName": "Homebridge Nature Remo Light My Signal ID",
   "name": "@nu50218/homebridge-nature-remo-light-my-signal-id",
-  "version": "0.0.1",
+  "version": "1.0.1",
   "description": "homebridge-nature-remo-light-my-signal-id",
   "license": "Apache-2.0",
   "repository": {
