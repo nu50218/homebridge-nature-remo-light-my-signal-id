@@ -1,0 +1,33 @@
+{
+  "pluginAlias": "homebridge-nature-remo-light-my-signal-id",
+  "pluginType": "accessory",
+  "schema": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "title": "Name",
+        "type": "string",
+        "required": true,
+        "default": "my-light"
+      },
+      "access_token": {
+        "title": "Access Token",
+        "type": "string",
+        "required": true,
+        "default": "access-token-xxxxxxxxxx"
+      },
+      "signal_id_on": {
+        "title": "Signal ID for ON",
+        "type": "string",
+        "required": true,
+        "default": "signal-xxxxxxxxxx"
+      },
+      "signal_id_off": {
+        "title": "Signal ID for OFF",
+        "type": "string",
+        "required": true,
+        "default": "signal-xxxxxxxxxx"
+      }
+    }
+  }
+}
