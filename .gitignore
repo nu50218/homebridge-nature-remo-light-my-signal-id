@@ -118,3 +118,7 @@ dist
 .yarn/unplugged
 .yarn/build-state.yml
 .pnp.*
+
+*.map
+__tests__/**/*.js
+*.d.ts
