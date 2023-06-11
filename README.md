@@ -6,6 +6,14 @@ On/Offのsignal_idを指定して照明にします。
 
 最後に送信されたOn/Offの値を保存しておくので、他のリモコンで操作すると同期がとれなくなります。
 
+
+## How to Test
+
+```console
+$ npm ci
+$ TEST_TOKEN=<Your Nature remo API> npm test
+```
+
 ## 設定例
 
 ```json
