@@ -21,6 +21,8 @@ export class LightBulb {
     protected readonly signal_id_off: string;
     protected readonly appliance_id: string;
     protected log: Logging;
+    private last_state_fetch_time?: Date;
+    private cached_status?: boolean;
 
     constructor(
       endpoint: string,
@@ -39,6 +41,18 @@ export class LightBulb {
     }
 
     public async status(): Promise<boolean> {
+      const now = new Date();
+
+      if (this.last_state_fetch_time === undefined || now.getTime() - this.last_state_fetch_time.getTime() > 1000 * 60 * 5) {
+        this.last_state_fetch_time = now;
+        this.cached_status = await this.getStatus();
+        return Promise.resolve(this.cached_status!);
+      } else {
+        return Promise.resolve(this.cached_status!);
+      }
+    }
+
+    private async getStatus(): Promise<boolean> {
       return Axios.get('/1/appliances/', {
         baseURL: this.endpoint,
         headers: {
@@ -88,6 +102,7 @@ export class LightBulb {
       return this.send(this.signal_id_on).then(
         () => {
           this.log.info('Completed Setting lightbulb state to ON');
+          this.cached_status = true;
         },
         (err) => {
           this.log.warn('Fail to send signal to nature remo api endpoint. ', err);
@@ -108,6 +123,7 @@ export class LightBulb {
       return this.send(this.signal_id_off).then(
         () => {
           this.log.info('Completed Setting lightbulb state to OFF');
+          this.cached_status = false;
         },
         (err) => {
           this.log.warn('Fail to send signal to nature remo api endpoint. ', err);
